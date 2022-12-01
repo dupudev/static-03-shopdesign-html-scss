@@ -1,0 +1,886 @@
+/*************************
+fonts
+*************************/
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+/*************************
+varaibles
+*************************/
+$blue: #4831d4;
+$lightBlue: #21b0d9;
+$green: #ccf381;
+$lightgray: #f7f7f7;
+$gray: #333;
+$white: #fff;
+$transition: 0.3s ease;
+$font: 16px;
+$fontFamily: "Roboto", sans-serif;
+$padding: 6.25rem 0;
+$boxShadow: 0 0 10px #b7b6b6;
+$textShadow: 0 0 2.5px #333;
+
+/*************************
+mixins
+*************************/
+@mixin flex(
+  $align-items,
+  $justify-content,
+  $flex-direction: row,
+  $flex-wrap: nowrap
+) {
+  display: flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
+}
+
+@mixin button(
+  $bgColor: $green,
+  $bgHover: transparent,
+  $textHover: $green,
+  $borderColor: $green,
+  $fontSize: 1.1rem,
+  $padding: 0.8em 4em
+) {
+  display: inline-block;
+  font-size: $fontSize;
+  background-color: $bgColor;
+  padding: $padding;
+  border: 2px solid $borderColor;
+  transition: $transition;
+  &:hover {
+    background-color: $bgHover;
+    color: $textHover;
+  }
+}
+/*************************
+basic styles
+*************************/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $fontFamily;
+  font-size: $font;
+  color: $gray;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+h1 {
+  color: $white;
+  font-size: 3.8rem;
+  font-weight: 900;
+  line-height: 1em;
+  margin-bottom: 0.1em;
+  span {
+    color: $green;
+  }
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  // margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+
+h4 {
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+h5 {
+  font-size: 1.7rem;
+  font-weight: 900;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: $gray;
+}
+
+ul {
+  list-style: none;
+}
+.wide-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/*************************
+top bar
+*************************/
+.top-bar {
+  background-color: $lightgray;
+  .wide-container {
+    @include flex(center, space-between);
+    padding: 0.3rem 0;
+    a {
+      transition: $transition;
+      &:hover {
+        color: $lightBlue;
+      }
+    }
+  }
+}
+
+/*************************
+nav bar
+*************************/
+nav {
+  background-color: $white;
+  border-bottom: 4px solid #ccf381;
+  .wide-container {
+    @include flex(center, space-between, row, wrap);
+    padding: 0.8rem 0;
+    .logo {
+      a {
+        font-size: 2.1rem;
+        i {
+          color: $green;
+          text-shadow: $textShadow;
+        }
+      }
+    }
+    .nav {
+      width: 28%;
+      ul {
+        @include flex(center, space-between);
+      }
+      a {
+        transition: $transition;
+        &:hover {
+          color: $lightBlue;
+        }
+      }
+      .active {
+        color: $lightBlue;
+        text-decoration: underline;
+        text-decoration-color: $green;
+        text-decoration-thickness: 0.15em;
+      }
+    }
+    .icons {
+      margin-left: 3em;
+      a {
+        &:nth-last-child(-n + 2) {
+          margin-left: 1em;
+        }
+        transition: $transition;
+        &:hover {
+          color: $lightBlue;
+        }
+      }
+    }
+  }
+}
+
+/*************************
+hero
+*************************/
+.hero {
+  background-image: url(./img/header.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .wide-container {
+    height: 100vh;
+    @include flex(start, center, column);
+    .text {
+      max-width: 45ch;
+      p {
+        margin-bottom: 1em;
+      }
+      .button {
+        @include button();
+      }
+    }
+  }
+}
+
+/*************************
+products
+*************************/
+.products {
+  padding: $padding;
+  .container {
+    @include flex(center, space-between, row, wrap);
+    gap: 1rem;
+    .heading {
+      text-align: center;
+      @include flex(center, center, column);
+      flex: 0 0 100%;
+      hr {
+        background-color: $green;
+        border: none;
+        width: 12.5rem;
+        height: 0.1rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+    article {
+      flex: 0 0 31%;
+      box-shadow: $boxShadow;
+      .pic {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        &:hover img {
+          transform: scale(1.2);
+        }
+        img {
+          transition: $transition;
+        }
+        .overlay1 {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 100%;
+          @include flex(end, center);
+          background-color: $lightBlue;
+          opacity: 0.8;
+          font-size: 2rem;
+          text-align: center;
+          color: $white;
+          span {
+            color: $green;
+          }
+          transition: $transition;
+        }
+        .overlay2 {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          bottom: -100%;
+          @include flex(start, center);
+          background-color: $lightBlue;
+          opacity: 0.8;
+          font-size: 5rem;
+          text-align: center;
+          transition: $transition;
+          color: $green;
+        }
+        &:hover .overlay1 {
+          bottom: 50%;
+        }
+        &:hover .overlay2 {
+          top: 50%;
+          bottom: 0;
+        }
+      }
+      .text {
+        padding: 10px 20px 20px;
+        h3 {
+          margin-bottom: 0.6em;
+        }
+        p {
+          span {
+            color: $blue;
+            text-decoration: line-through;
+            margin-right: 2em;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*************************
+footer
+*************************/
+footer {
+  padding: $padding;
+  background-color: $blue;
+  .container {
+    @include flex(start, space-between, row, wrap);
+    section {
+      color: $white;
+      flex: 1 0 33.33%;
+      h5 {
+        margin-bottom: 1.3em;
+      }
+      p {
+        margin-bottom: 1em;
+      }
+      ul {
+        li {
+          margin-bottom: 0.5em;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          a {
+            color: $green;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+      .input {
+        position: relative;
+        input {
+          padding: 1em;
+          width: 10.5rem;
+          &:focus {
+            background-color: $gray;
+            color: $green;
+          }
+          &:focus::placeholder {
+            color: $green;
+          }
+        }
+        button {
+          cursor: pointer;
+          @include button(
+            $bgHover: $gray,
+            $fontSize: 0.9rem,
+            $padding: 0.4em 0.4em
+          );
+          font-weight: 600;
+          position: absolute;
+          top: 7px;
+          left: 150px;
+        }
+      }
+    }
+  }
+}
+
+/*************************
+bottom bar
+*************************/
+.bottom-bar {
+  background-color: $green;
+  .wide-container {
+    @include flex(center, space-between);
+    height: 5vh;
+    .social {
+      a {
+        font-size: 1.25rem;
+        transition: $transition;
+        &:nth-last-child(-n + 2) {
+          margin-left: 1em;
+        }
+        &:hover {
+          color: $lightBlue;
+        }
+      }
+    }
+  }
+}
+
+/*************************************************
+**************************************************
+*****************   SHOP PAGE   ******************
+**************************************************
+**************************************************/
+
+/*************************
+shop - info
+*************************/
+.shop-info {
+  text-align: center;
+  padding: 3rem 0;
+  background-color: $lightgray;
+  .container {
+    @include flex(center, center, column);
+    h2 {
+      font-size: 2.6rem;
+    }
+    p {
+      font-weight: 400;
+    }
+  }
+}
+
+/*************************
+shop - offers
+*************************/
+.shop-offers {
+  padding: $padding;
+  border-bottom: 2px solid $green;
+  .container {
+    @include flex(center, space-between, row, wrap);
+    // gap: 1rem;
+    article {
+      @include flex(center, center, column);
+      flex: 0 0 23%;
+      text-align: center;
+      border: 1px solid $gray;
+      box-shadow: $boxShadow;
+      padding: 2rem 1rem;
+      transition: $transition;
+      // cursor: pointer;
+      &:hover {
+        transform: translateY(-1rem);
+      }
+      i {
+        font-size: 2rem;
+        color: $green;
+        text-shadow: $textShadow;
+        margin-bottom: 0.4em;
+      }
+      h4 {
+        font-size: 1.5rem;
+        margin-bottom: 0.4em;
+      }
+      p {
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+/*************************
+shop - cta
+*************************/
+.shop-cta {
+  background-image: url(./img/shop.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  .container {
+    @include flex(start, center, column);
+    height: 80vh;
+    flex: 1 0 33%;
+    // width: max-content;
+    // margin-left: 50%;
+    p:first-of-type {
+      font-size: 2rem;
+      font-weight: 400;
+      margin: 0;
+    }
+    h2 {
+      font-size: 6rem;
+    }
+    .button {
+      @include button($bgHover: $gray);
+    }
+    p {
+      margin-top: 2em;
+    }
+  }
+  .empty {
+    flex: 3 1 35%;
+  }
+}
+
+/*************************************************
+**************************************************
+***************   Product PAGE   *****************
+**************************************************
+**************************************************/
+
+/*************************
+product - info
+*************************/
+.product-info {
+  text-align: center;
+  padding: 3rem 0;
+  background-color: $lightgray;
+  .container {
+    @include flex(center, center, column);
+    h2 {
+      font-size: 2.6rem;
+    }
+    p {
+      font-weight: 400;
+    }
+  }
+}
+
+/*************************
+product - items
+*************************/
+.product-items {
+  padding: $padding;
+  .container {
+    @include flex(center, space-between, row, wrap);
+    .slika {
+      flex: 0 0 49%;
+      position: relative;
+      .overlay {
+        background-color: $lightBlue;
+        opacity: 0;
+        position: absolute;
+        inset: 0;
+        transition: $transition;
+
+        @include flex(center, center, column);
+        height: 100%;
+        p {
+          color: $green;
+          text-shadow: $textShadow;
+          font-size: 5rem;
+          &:first-child {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: $gray;
+            text-shadow: none;
+            font-size: 1rem;
+            padding: 0.2em 0.5em;
+          }
+        }
+        .button {
+          @include button($fontSize: 1.3rem, $padding: 0.8em 2.5em);
+          margin-bottom: 2em;
+          margin-top: 1em;
+        }
+        .social {
+          a {
+            color: $white;
+            font-size: 2.5rem;
+            margin: 0.5em;
+            transition: $transition;
+            &:hover {
+              color: $green;
+            }
+          }
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+    .tekst {
+      flex: 0 0 49%;
+      h3 {
+        font-size: 3rem;
+      }
+      h4 {
+        font-size: 2rem;
+        color: $green;
+        text-shadow: $textShadow;
+      }
+      p {
+        margin-top: 1em;
+      }
+      span {
+        color: $blue;
+      }
+      hr {
+        background-color: $gray;
+        height: 1px;
+        border: none;
+        margin: 2em 0;
+      }
+      .counter {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        .btn {
+          cursor: pointer;
+          background-color: $white;
+          margin-right: 0.5em;
+          border: 1px solid $gray;
+          padding: 0.5em 1em;
+          &:hover {
+            background-color: $green;
+          }
+        }
+        .number {
+          text-align: center;
+          background-color: $white;
+          margin-right: 0.5em;
+          border: 1px solid $gray;
+          padding: 0.5em 0;
+          width: 3rem;
+        }
+      }
+      .buttons {
+        margin-top: 1em;
+        .button {
+          @include button($bgHover: $gray, $padding: 0.8em 2.5em);
+        }
+        .button2 {
+          @include button(
+            $bgColor: $white,
+            $bgHover: $green,
+            $textHover: $gray,
+            $borderColor: $gray,
+            $padding: 0.8em 1.3em
+          );
+        }
+      }
+    }
+  }
+}
+
+/*************************************************
+**************************************************
+***************   Responsiveness  *****************
+**************************************************
+**************************************************/
+@media (max-width: 680px) {
+  .container {
+    width: 90%;
+  }
+  .top-bar {
+    .wide-container {
+      @include flex(center, center, column);
+      font-size: 0.9rem;
+    }
+  }
+  nav {
+    .wide-container {
+      .nav {
+        order: 3;
+        flex: 0 0 100%;
+        margin-top: 1rem;
+        ul {
+          justify-content: space-evenly;
+        }
+      }
+    }
+  }
+
+  .hero {
+    .wide-container {
+      @include flex(center, center);
+      .text {
+        @include flex(center, center, column);
+        text-align: center;
+      }
+    }
+    p {
+      color: $white;
+    }
+  }
+  footer {
+    .container {
+      gap: 3rem;
+      h5 {
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .products {
+    .container {
+      gap: 3rem;
+      article {
+        flex: 0 0 100%;
+      }
+    }
+  }
+  .shop-offers {
+    .container {
+      gap: 1.5rem 1rem;
+      article {
+        flex: 0 0 100%;
+      }
+    }
+  }
+  .shop-cta {
+    .container {
+      flex: 1 0 35%;
+      p:first-of-type {
+        font-size: 1.2rem;
+      }
+      h2 {
+        font-size: 2.2rem;
+      }
+      .button {
+        @include button($bgHover: $gray, $fontSize: 0.8rem, $padding: 0.6em 1.5em);
+      }
+    }
+    // .empty {
+    //   flex: 1 0 20%;
+    // }
+  }
+  .product-items {
+    .container {
+      gap: 1rem;
+      justify-content: center;
+      .slika {
+        flex: 0 0 100%;
+        .overlay {
+          p {
+            font-size: 3.5rem;
+          }
+          .button {
+            @include button($fontSize: 1rem, $padding: 0.8em 2.5em);
+            margin-bottom: 1.5em;
+            margin-top: 0.5em;
+          }
+          .social {
+            a {
+              font-size: 1.5rem;
+              margin: 0.5em;
+            }
+          }
+        }
+      }
+      .tekst {
+        flex: 0 0 100%;
+        .buttons {
+          margin-top: 1em;
+          .button {
+            @include button(
+              $bgHover: $gray,
+              $fontSize: 1rem,
+              $padding: 0.6em 2.1em
+            );
+          }
+          .button2 {
+            @include button(
+              $bgColor: $white,
+              $bgHover: $green,
+              $textHover: $gray,
+              $borderColor: $gray,
+              $padding: 0.8em 1.2em,
+              $fontSize: 0.86rem
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 681px) and (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+  .shop-offers {
+    .container {
+      gap: 1.5rem 1rem;
+      article {
+        flex: 0 0 48%;
+      }
+    }
+  }
+  .shop-cta {
+    .container {
+      p:first-of-type {
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 4rem;
+      }
+      .button {
+        @include button($bgHover: $gray, $fontSize: 1rem);
+      }
+    }
+  }
+  .product-items {
+    .container {
+      gap: 1rem;
+      justify-content: center;
+      .slika {
+        flex: 0 0 100%;
+      }
+      .tekst {
+        flex: 0 0 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .shop-offers {
+    .container {
+      gap: 1.5rem 1rem;
+      article {
+        flex: 0 0 48%;
+      }
+    }
+  }
+  .shop-cta {
+    .container {
+      h2 {
+        font-size: 4.5rem;
+      }
+    }
+  }
+  .product-items {
+    .container {
+      width: 90%;
+      justify-content: center;
+      gap: 1rem;
+      .slika {
+        flex: 1 0 48%;
+      }
+      .tekst {
+        flex: 1 1 30%;
+        p {
+          margin-top: 0.2em;
+        }
+        hr {
+          background-color: $gray;
+          height: 1px;
+          border: none;
+          margin: 0.5em 0;
+        }
+        .counter {
+          margin-top: 0.5rem;
+          margin-bottom: 1rem;
+        }
+        .buttons {
+          margin-top: 1em;
+          .button {
+            @include button(
+              $bgHover: $gray,
+              $fontSize: 1rem,
+              $padding: 0.6em 2.1em
+            );
+          }
+          .button2 {
+            @include button(
+              $bgColor: $white,
+              $bgHover: $green,
+              $textHover: $gray,
+              $borderColor: $gray,
+              $padding: 0.8em 1.2em,
+              $fontSize: 0.86rem
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1525px) {
+  .shop-offers {
+    .container {
+      width: 90%;
+      // gap: 1rem;
+      article {
+        flex: 0 0 24%;
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
+  }
+}
